@@ -1,1 +1,1 @@
-mobile app server
+Chat App Server

@@ -16,6 +16,8 @@ app.use('/register', reg);
 var login = require('./routes/login.js');
 app.use('/login', login);
 
+var search = require('./routes/search.js');
+app.use('/search', search);
 
 var sql = require('./routes/sql.js');
 app.use('/sql', sql);

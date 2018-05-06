@@ -20,8 +20,8 @@ router.use(bodyParser.json());
 router.post('/', (req, res) => {
     let username = req.body['username'];
     let email = req.body['email'];
-    let first = req.body['first'];
-    let last = req.body['last'];
+    let first = req.body['firstname'];
+    let last = req.body['lastname'];
 
     if (username)  {
         db.one('SELECT Firstname, Lastname FROM Members WHERE Username=$1', [username])

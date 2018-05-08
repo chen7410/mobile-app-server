@@ -24,12 +24,13 @@ router.post('/', (req, res) => {
     let last = req.body['lastname'];
 
     if (username)  {
-        db.one('SELECT Firstname, Lastname FROM Members WHERE Username=$1', [username])
+        db.one('SELECT * FROM Members WHERE Username=$1', [username])
         .then((data) => {
             res.send({
                 success: true,
                 firstname: data.firstname,
-                lastname: data.lastname
+                lastname: data.lastname,
+                memberid: data.memberid
             });
         }).catch((err) => {
             res.send({
@@ -37,12 +38,13 @@ router.post('/', (req, res) => {
             });
         });
     } else if (email) {
-        db.one('SELECT Firstname, Lastname FROM Members WHERE Email=$1', [email])
+        db.one('SELECT * FROM Members WHERE Email=$1', [email])
         .then((data) => {
             res.send({
                 success: true,
                 firstname: data.firstname,
-                lastname: data.lastname
+                lastname: data.lastname,
+                memberid: data.memberid
             });
         }).catch((err) => {
             res.send({
@@ -50,12 +52,13 @@ router.post('/', (req, res) => {
             });
         });
     } else if (first && last) {
-        db.one('SELECT Firstname, Lastname FROM Members WHERE Firstname=$1 AND Lastname=$2', [first, last])
+        db.one('SELECT * FROM Members WHERE Firstname=$1 AND Lastname=$2', [first, last])
         .then((data) => {
             res.send({
                 success: true,
                 firstname: data.firstname,
-                lastname: data.lastname
+                lastname: data.lastname,
+                memberid: data.memberid
             });
         }).catch((err) => {
             res.send({

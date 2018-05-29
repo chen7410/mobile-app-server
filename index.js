@@ -10,8 +10,20 @@ const bodyParser = require("body-parser");
 //We use this create the SHA256 hash
 const crypto = require("crypto");
 
+var addtoChat = require('./routes/addToChat.js');
+app.use('/addToChat', addtoChat);
+
+var leaveChat = require('./routes/leaveChat.js');
+app.use('/leaveChat', leaveChat);
+
 var reg = require('./routes/register.js');
 app.use('/register', reg);
+
+var verification = require('./routes/verification.js');
+app.use('/verification', verification);
+
+var verified = require('./routes/verified.js');
+app.use('/verified', verified);
 
 var login = require('./routes/login.js');
 app.use('/login', login);
@@ -22,6 +34,50 @@ app.use('/search', search);
 var sql = require('./routes/sql.js');
 app.use('/sql', sql);
 
+var viewConn = require('./routes/viewConnections.js');
+app.use('/viewConnections', viewConn);
+
+var viewReq = require('./routes/viewRequests.js');
+app.use('/viewRequests', viewReq);
+
+var acceptRequest = require('./routes/acceptRequest.js');
+app.use('/acceptRequest', acceptRequest);
+
+var rejectRequest = require('./routes/rejectRequest.js');
+app.use('/rejectRequest', rejectRequest);
+
+var removeConnection = require('./routes/removeConnection.js');
+app.use('/removeConnection', removeConnection);
+
+var msg = require('./routes/messages.js');
+app.use('/', msg);
+
+var chats = require('./routes/chats.js');
+app.use('/', chats);
+
+ var chatinfo = require('./routes/chatinfo.js');
+ app.use('/', chatinfo);
+
+ var sendFriendRequest = require('./routes/sendFriendRequest.js');
+ app.use('/sendFriendRequest', sendFriendRequest);
+
+ var newChatId = require('./routes/getChatId.js');
+ app.use('/getChatId', newChatId);
+
+ var createChatSession = require('./routes/createChatSession.js');
+ app.use('/createChatSession', createChatSession);
+
+ var forgotpassword  = require('./routes/forgotPassword.js');
+ app.use('/forgotPassword', forgotpassword);
+
+ var changepassword  = require('./routes/forgotpasswordchange.js');
+ app.use('/postChangePass', changepassword);
+
+ var leaveGroupChat = require('./routes/leaveGroupChat.js');
+ app.use('/leaveGroupChat', leaveGroupChat);
+
+ var getNotificationMessages = require('./routes/getNotificationMessages.js');
+ app.use('/getNotificationMessages', getNotificationMessages);
 
 /*
  * Return HTML for the / end point. 

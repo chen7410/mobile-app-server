@@ -24,42 +24,57 @@ router.post('/', (req, res) => {
     let last = req.body['lastname'];
 
     if (username)  {
-        db.one('SELECT * FROM Members WHERE Username=$1', [username])
+        db.manyOrNone('SELECT Memberid, Firstname, Lastname, Username FROM Members WHERE Username=$1', [username])
         .then((data) => {
-            res.send({
-                success: true,
-                firstname: data.firstname,
-                lastname: data.lastname,
-                memberid: data.memberid
-            });
+            if (data.length == 0) {
+                res.send({
+                    success: false,
+                });
+            } else {
+                res.send({
+                    success: true,
+                    data: data
+                });
+            }
+            
         }).catch((err) => {
             res.send({
                 success: false
             });
         });
     } else if (email) {
-        db.one('SELECT * FROM Members WHERE Email=$1', [email])
+        db.manyOrNone('SELECT Memberid, Firstname, Lastname, Username FROM Members WHERE Email=$1', [email])
         .then((data) => {
-            res.send({
-                success: true,
-                firstname: data.firstname,
-                lastname: data.lastname,
-                memberid: data.memberid
-            });
+            if (data.length == 0) {
+                res.send({
+                    success: false,
+                });
+            } else {
+                res.send({
+                    success: true,
+                    data: data
+                });
+            }
+            
         }).catch((err) => {
             res.send({
                 success: false
             });
         });
     } else if (first && last) {
-        db.one('SELECT * FROM Members WHERE Firstname=$1 AND Lastname=$2', [first, last])
+        db.manyOrNone('SELECT Memberid, Firstname, Lastname, Username FROM Members WHERE Firstname=$1 AND Lastname=$2', [first, last])
         .then((data) => {
-            res.send({
-                success: true,
-                firstname: data.firstname,
-                lastname: data.lastname,
-                memberid: data.memberid
-            });
+            if (data.length == 0) {
+                res.send({
+                    success: false,
+                });
+            } else {
+                res.send({
+                    success: true,
+                    data: data
+                });
+            }
+            
         }).catch((err) => {
             res.send({
                 success: false

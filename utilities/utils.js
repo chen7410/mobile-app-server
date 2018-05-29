@@ -6,6 +6,14 @@ const crypto = require("crypto");
 
 const FormData = require("form-data");
 
+// var api_key = process.env.MAIL_GUN_API_KEY;
+var api_key = '4b91e511f7b75b5e2d7d75138fd2b613-115fe3a6-ca6f622c';
+var domain = 'sandbox14b677fb1d104339931f4ef81a8ee20b.mailgun.org';
+var mail = require('mailgun-js')({
+    apiKey: api_key,
+    domain: domain
+});
+
 function sendEmail(from, to, subject, message) {
     let form = new FormData();
     form.append("from", from);
@@ -15,6 +23,28 @@ function sendEmail(from, to, subject, message) {
     form.submit("http://cssgate.insttech.washington.edu/~cfb3/mail.php", (err, res) => {
         if(err) console.error(err);
         console.log(res);
+    });
+}
+
+/**
+ * Since this is free mailgun. To use it, the recipients must be authorized in 
+ * https://app.mailgun.com/app/domains/sandbox14b677fb1d104339931f4ef81a8ee20b.mailgun.org
+ * click Manage Authorized Recipients to add your email.
+ * Example in forgotPassword.js
+ * @param {*} from sender mail
+ * @param {*} to 
+ * @param {*} subject 
+ * @param {*} message 
+ */
+function mailgun(from, to, subject, message) {
+    var data = {
+        from: from,
+        to: to,
+        subject: subject,
+        text: message
+    };
+    mail.messages().send(data, function (error, body) {
+        console.log(body);
     });
 }
 
@@ -29,5 +59,5 @@ function getHash(pw, salt) {
 }
 
 module.exports = { 
-    db, getHash, sendEmail
+    db, getHash, sendEmail, mailgun
 };

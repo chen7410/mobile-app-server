@@ -36,13 +36,15 @@ router.post('/', (req, res) => {
             let lastname = row['lastname'];
             let username = row['username'];
             let email = row['email'];
+            let verification = row['verification'];
             res.send({
                 success: wasCorrectPw,
                 memberid: memberid,
                 firstname: firstname,
                 lastname: lastname,
                 username: username,
-                email: email
+                email: email,
+                verification: verification
             });
         })
         //More than one row shouldn't be found, since table has constraint on it
